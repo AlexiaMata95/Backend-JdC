@@ -1,22 +1,29 @@
 package org.generation.joyaDelCaribe.model;
 
 public class Usuario {
-	private Long idUser;
+	private int idUser;
 	private String name;
 	private String lastName;
 	private String phone;
 	private String email;
 	private String password;
+	private static int total = 0;
 	
-	public Usuario(Long id, String name, String lastName, String phone, String email, String password) {
+	public Usuario(String name, String lastName, String phone, String email, String password) {
+		super();
 		this.name = name;
 		this.lastName = lastName;
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
+		Usuario.total++;
+		this.idUser = total;
 	}
 
-	public Usuario() {}
+	public Usuario() {
+		Usuario.total++;
+		this.idUser = total;
+	}
 
 	public String getName() {
 		return name;
@@ -58,7 +65,7 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public Long getIdUser() {
+	public int getIdUser() {
 		return idUser;
 	}
 
