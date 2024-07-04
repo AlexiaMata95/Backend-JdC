@@ -3,6 +3,7 @@ package org.generation.joyaDelCaribe.service;
 import java.util.ArrayList;
 
 import org.generation.joyaDelCaribe.model.ChangePassword;
+import org.generation.joyaDelCaribe.model.Producto;
 import org.generation.joyaDelCaribe.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,16 +42,28 @@ public class UsuarioService {
 	public Usuario deleteUsuario(int id) {
 		Usuario tmpUser = null;
 		for (Usuario usuario : listaUser) {
-			if (usuario.getIdUser()==id) {
+			if (usuario.getIdUser() == id) {
 				tmpUser= listaUser.remove(listaUser.indexOf(usuario));
+				break;
 			}
 		}
 		return tmpUser;
 	}
 
 	public Usuario addUsuario(Usuario usuario) {
-		listaUser.add(usuario);
-		return usuario;
+		Usuario tmpUser = null;
+		boolean userExists = false;
+		for (Usuario user : listaUser) {
+			if(user.getEmail().equals(usuario.getEmail())) {
+				userExists = true;
+				break;
+			}
+		}
+		if(!userExists) {
+			listaUser.add(usuario);
+			tmpUser = usuario;
+		}
+		return tmpUser;
 	}
 
 	public Usuario updateUser(int id, ChangePassword changePassword) {
