@@ -1,7 +1,7 @@
 package org.generation.joyaDelCaribe.model;
 
 public class Producto {
-	private Long idProducto;
+	private int idProducto;
 	private String name;
 	private String product;
 	private Double price;
@@ -9,11 +9,12 @@ public class Producto {
 	private String category;
 	private String description;
 	private Double discount; //Descuento debe ser en decimal
-	private Long idUser;
-	private Long idOrden;
+	private Integer idUser;
+	private Integer idOrden;
+	private static int total = 0;
 	
 	public Producto(String name, String product, Double price, String image, String category, String description,
-			Double discount, Long idUser, Long idOrden) {
+			Double discount, Integer idUser, Integer idOrden) {
 		super();
 		this.name = name;
 		this.product = product;
@@ -24,10 +25,13 @@ public class Producto {
 		this.discount = discount;
 		this.idUser = idUser;
 		this.idOrden = idOrden;
+		Producto.total++;
+		this.idProducto = total;
 	}
 
 	public Producto() {
-		super();
+		Producto.total++;
+		this.idProducto = total;
 	}
 
 	public String getName() {
@@ -86,16 +90,23 @@ public class Producto {
 		this.discount = discount;
 	}
 
-	public Long getIdProducto() {
+	public Integer getIdProducto() {
 		return idProducto;
 	}
 
-	public Long getIdUser() {
+	public Integer getIdUser() {
 		return idUser;
 	}
 
-	public Long getIdOrden() {
+	public void setIdUser(Integer idUser) {
+		this.idUser = idUser;
+	}
+
+	public Integer getIdOrden() {
 		return idOrden;
+	}
+	public void setIdOrden(Integer idOrden) {
+		this.idOrden = idOrden;
 	}
 
 	@Override

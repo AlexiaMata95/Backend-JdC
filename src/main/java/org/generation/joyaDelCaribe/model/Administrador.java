@@ -1,19 +1,23 @@
 package org.generation.joyaDelCaribe.model;
 
 public class Administrador {
-	private Long idAdmin;
 	private String email;
 	private String password;
-	
+	private int idAdmin;
+	private static int total;
 	
 	public Administrador(String email, String password) {
-		super();
 		this.email = email;
 		this.password = password;
+		Administrador.total++;
+		this.idAdmin = total;
+		
 	}
 
-	public Administrador() {}
-
+	public Administrador() {
+		Administrador.total++;
+		this.idAdmin = total;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -30,7 +34,7 @@ public class Administrador {
 		this.password = password;
 	}
 
-	public Long getIdAdmin() {
+	public int getIdAdmin() {
 		return idAdmin;
 	}
 

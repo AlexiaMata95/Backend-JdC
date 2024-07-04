@@ -1,27 +1,36 @@
 package org.generation.joyaDelCaribe.model;
 
-public class Orden {
-	private Long idOrden;
-	private Long idUser;
-	private String date;
-	private int quantity;
-	private double price;
-	
-	public Orden() {}
+import java.util.Date;
 
-	public Orden(Long idUser, String date, int quantity, double price) {
+public class Orden {
+	private int idOrden;
+	private Integer idUser;
+	private Date date;
+	private Integer quantity;
+	private Double price;
+	private static int total =0;
+	
+	public Orden(Integer idUser, Date date, Integer quantity, Double price) {
 		super();
 		this.idUser = idUser;
 		this.date = date;
 		this.quantity = quantity;
 		this.price = price;
+		Orden.total++;
+		idOrden = total;
 	}
+	
+	public Orden() {
+		Orden.total++;
+		idOrden = total;
+		}
 
-	public String getDate() {
+
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -29,7 +38,7 @@ public class Orden {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
@@ -37,16 +46,20 @@ public class Orden {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public Long getIdOrden() {
+	public int getIdOrden() {
 		return idOrden;
 	}
 
-	public Long getIdUser() {
+	public int getIdUser() {
 		return idUser;
+	}
+
+	public void setIdUser(Integer idUser) {
+		this.idUser = idUser;
 	}
 	
 	@Override
