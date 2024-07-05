@@ -2,13 +2,34 @@ package org.generation.joyaDelCaribe.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+//POJO
+
+@Entity //tabla en base de datos
+@Table(name="ordenes")
 public class Orden {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false)
+	
 	private int idOrden;
+	@Column(nullable=false)
 	private Integer idUser;
+	@Column(nullable=false)
 	private Date date;
+	@Column(nullable=false)
 	private Integer quantity;
+	@Column(nullable=false)
 	private Double price;
+	@Column(nullable=false)
 	private static int total =0;
+	@Column(nullable=false)
 	
 	public Orden(Integer idUser, Date date, Integer quantity, Double price) {
 		super();
