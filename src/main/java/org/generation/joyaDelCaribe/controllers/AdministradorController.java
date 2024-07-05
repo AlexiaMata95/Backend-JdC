@@ -1,6 +1,6 @@
 package org.generation.joyaDelCaribe.controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.generation.joyaDelCaribe.model.Administrador;
 import org.generation.joyaDelCaribe.service.AdministradorService;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping(path = "/api/administradores/")
 public class AdministradorController {
@@ -26,7 +27,7 @@ public class AdministradorController {
 	}	
 	
 	@GetMapping
-	public ArrayList<Administrador> getAdministradores(){
+	public List<Administrador> getAdministradores(){
 		return adminService.getAllAdmins();
 	}
 	
@@ -53,3 +54,7 @@ public class AdministradorController {
 	}
 	
 }
+	
+	
+	
+

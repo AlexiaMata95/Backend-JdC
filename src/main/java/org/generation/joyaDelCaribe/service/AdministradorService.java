@@ -1,22 +1,32 @@
 package org.generation.joyaDelCaribe.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.generation.joyaDelCaribe.model.Administrador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
+
+
 @Service
 public class AdministradorService {
-	ArrayList<Administrador> listaAdmin = new ArrayList<Administrador>();
+	List<Administrador> listaAdmin = new ArrayList<Administrador>();
 	
+
 	@Autowired
+	public AdministradorService(AdministradorRepository administradorRepository) {
+		this.administradorRepository = administradorRepository;
+	}//constructor
+	/*
 	public AdministradorService() { // Va a agregarle datos a la lista 
 		listaAdmin.add( new Administrador("alexia@bootcamp.com", "UnaContra12"));
 		listaAdmin.add( new Administrador("alan@bootcamp.com", "UnaContra13"));
 		listaAdmin.add( new Administrador("esdras@bootcamp.com", "UnaContra14"));
 		listaAdmin.add( new Administrador("diana@bootcamp.com", "UnaContra15"));
 	}
+	*/
 
 	public ArrayList<Administrador> getAllAdmins() {
 		return listaAdmin;
