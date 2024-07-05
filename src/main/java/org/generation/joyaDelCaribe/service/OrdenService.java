@@ -1,80 +1,66 @@
 package org.generation.joyaDelCaribe.service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.Date;
 
 import org.generation.joyaDelCaribe.model.Orden;
+import org.generation.joyaDelCaribe.repository.OrdenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrdenService {
-	ArrayList<Orden> listaOrden = new ArrayList<Orden>();
+	//List<Orden> listaOrden = new List<Orden>();
+	public final OrdenRepository ordenRepository;
+	
 	
 	@Autowired
-	public OrdenService() { // Va a agregarle datos a la lista 
-		listaOrden.add( new Orden(3,new Date(), 4, 1250.78));
-		listaOrden.add( new Orden(2,new Date(), 10, 3650.98));
-		listaOrden.add( new Orden(8,new Date(), 1, 299.3));
-		listaOrden.add( new Orden(4,new Date(), 5, 1580.42));
-	}
+	public OrdenService(OrdenRepository ordenRepository) {
+		this.ordenRepository = ordenRepository;
+	}//constructor
+	
 
-	public ArrayList<Orden> getAllOrdenes() {
-		return listaOrden;
-	}
+	public List<Orden> getAllOrdenes() {
+		return ordenRepository.findAll();
+	}//getAllOrdenes
 
-	public Orden getOrden(int id) {
+	public Orden getOrden(Long id) {
+		return ordenRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("La orden con el id [" + id + "] no existe"));
+	}//getOrden
+
+	public Orden deleteOrden(Long id) {
 		Orden tmpOrden = null;
-		for (Orden orden : listaOrden) {
-			if(orden.getIdOrden() == id) {
-				tmpOrden = orden;
-				break;
-			}
+		if (ordenRepository.existsById(id)) {
+			tmpOrden = ordenRepository.findById(id).get();
+			ordenRepository.deleteById(id);
 		}
 		return tmpOrden;
-	}
-
-	public Orden deleteOrden(int id) {
-		Orden tmpOrden = null;
-		for (Orden orden : listaOrden) {
-			if(orden.getIdOrden() == id) {
-				tmpOrden = orden;
-				listaOrden.remove(listaOrden.indexOf(orden));
-				break;
-			}
-		}
-		return tmpOrden;
-	}
+	}//deleteOrden
 
 	public Orden addOrden(Orden orden) {
-		Orden tmpOrden = null;
-		boolean ordenExists = false;
-		for (Orden ord : listaOrden) {
-			if(ord.getIdOrden() == orden.getIdOrden()) {
-				ordenExists = true;
-				break;
-			}
+		Optional<Orden> tmpOrden = ordenRepository.findByDate(orden.getDate());
+		if (tmpOrden.isEmpty()) {
+			return ordenRepository.save(orden);
+		}else {
+			System.out.println("La orden con el nombre [] ya existe");
+			return null;
 		}
-		if(!ordenExists) {
-			listaOrden.add(orden);
-			tmpOrden = orden;
-		}
-		return tmpOrden;
-	}
+	}//addOrden
 
-	public Orden updateOrden(int id, Integer idUser, Date date, Integer quantity, Double price) {
+	public Orden updateOrden(Long id, Integer idUser, Date date, Integer quantity, Double price) {
 		Orden tmpOrden = null;
-		for (Orden orden : listaOrden) {
-			if(orden.getIdOrden() == id) {
+			if(ordenRepository.existsById(id)) {
+				Orden orden=ordenRepository.findById(id).get();
 				if (idUser != null) { orden.setIdUser(idUser); }
 				if (date != null) { orden.setDate(date); }
 				if (quantity != null) { orden.setQuantity(quantity); }
 				if (price != null) { orden.setPrice(price); }
-				tmpOrden = orden;
-				break;
-			}
-		}
+				ordenRepository.save(orden);
+				tmpOrden=orden;
+			}//if
 		return tmpOrden;
-	}
+	}//UpdateUorden
 			
-}
+}//ClassOrdenService

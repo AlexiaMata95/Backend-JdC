@@ -1,6 +1,6 @@
 package org.generation.joyaDelCaribe.controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 import org.generation.joyaDelCaribe.model.Orden;
@@ -24,20 +24,20 @@ public class OrdenController {
 	@Autowired
 	public OrdenController(OrdenService ordenService) {
 		this.ordenService = ordenService;
-	}	
+	}
 	
 	@GetMapping
-	public ArrayList<Orden> getOrdenes(){
+	public List<Orden> getOrdenes(){
 		return ordenService.getAllOrdenes();
 	}
 	
 	@GetMapping(path = "{ordenId}")
-	public Orden getOrden(@PathVariable("ordenId") int id) {
+	public Orden getOrden(@PathVariable("ordenId") Long id) {
 		return ordenService.getOrden(id);
 	}
 	
 	@DeleteMapping(path = "{ordenId}")
-	public Orden deleteOrden(@PathVariable("ordenId") int id) {
+	public Orden deleteOrden(@PathVariable("ordenId") Long id) {
 		return ordenService.deleteOrden(id);
 	}
 	
@@ -47,7 +47,7 @@ public class OrdenController {
 	}
 	
 	@PutMapping(path = "{ordenId}")
-	public Orden updateOrden(@PathVariable("ordenId") int id,
+	public Orden updateOrden(@PathVariable("ordenId") Long id,
 			@RequestParam(required = false) Integer idUser,
 			@RequestParam(required = false) Date date,
 			@RequestParam(required = false) Integer quantity,
@@ -55,5 +55,4 @@ public class OrdenController {
 		return ordenService.updateOrden(id, idUser, date, quantity, price);
 	}
 	
-}
-
+}//class OrdenController
