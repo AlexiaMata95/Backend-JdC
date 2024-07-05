@@ -1,4 +1,4 @@
-package src.main.java.org.generation.joyaDelCaribe.repository;
+package org.generation.joyaDelCaribe.repository;
 import java.util.Optional;
 
 
