@@ -1,33 +1,39 @@
 package org.generation.joyaDelCaribe.service;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
+import org.generation.ecommerce.repository.ProductoRepository
 import org.generation.joyaDelCaribe.model.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProductoService {
-	ArrayList<Producto> listaProducto = new ArrayList<Producto>();
+	List<Producto> listaProducto = new List<Producto>();
+	
+	//@Autowired
+	//public ProductoService() { // Va a agregarle datos a la lista 
+		//listaProducto.add( new Producto("Frescura Marina", "Tónico Facial con Ácido Hialurónico", 499.00,
+				//"frescuraMarina.webp","SkinCare","Revitaliza tu piel con cada lavada gracias a "
+				//+ "nuestro limpiador Frescura Marina, que limpia profundamente mientras mantiene "
+				//+ "la hidratación natural de tu piel.",0.0,5,8));
+		//listaProducto.add(  new Producto("Bruma de Cenote", "Limpiador facial suave", 559.00,
+				//"brumaCenote.webp","SkinCare","Refresca y prepara tu piel con la hidratación del "
+				//+ "ácido hialurónico inspirado en las aguas cristalinas de los cenotes del "
+				//+ "Caribe.",0.0,3,7));
+		//listaProducto.add(  new Producto("Cobertura de Coral", "Corrector", 129.00,
+				//"coberturaDeCoral.webp","Maquillaje","Cubre imperfecciones y ojeras eficazmente"
+				//+ " con nuestro corrector inspirado en la robustez y belleza del coral.",0.15,4,7));
+		
+	//}
 	
 	@Autowired
-	public ProductoService() { // Va a agregarle datos a la lista 
-		listaProducto.add( new Producto("Frescura Marina", "Tónico Facial con Ácido Hialurónico", 499.00,
-				"frescuraMarina.webp","SkinCare","Revitaliza tu piel con cada lavada gracias a "
-				+ "nuestro limpiador Frescura Marina, que limpia profundamente mientras mantiene "
-				+ "la hidratación natural de tu piel.",0.0,5,8));
-		listaProducto.add(  new Producto("Bruma de Cenote", "Limpiador facial suave", 559.00,
-				"brumaCenote.webp","SkinCare","Refresca y prepara tu piel con la hidratación del "
-				+ "ácido hialurónico inspirado en las aguas cristalinas de los cenotes del "
-				+ "Caribe.",0.0,3,7));
-		listaProducto.add(  new Producto("Cobertura de Coral", "Corrector", 129.00,
-				"coberturaDeCoral.webp","Maquillaje","Cubre imperfecciones y ojeras eficazmente"
-				+ " con nuestro corrector inspirado en la robustez y belleza del coral.",0.15,4,7));
-		
+	public ProductoService(ProductoRepository productoRepository) {
+		this.productoRepository = productoRepository;
 	}
 
-	public ArrayList<Producto> getAllProductos() {
+	public List<Producto> getAllProductos() {
 		return listaProducto;
 	}
 

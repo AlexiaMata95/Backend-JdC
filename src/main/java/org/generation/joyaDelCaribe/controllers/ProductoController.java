@@ -1,6 +1,6 @@
 package org.generation.joyaDelCaribe.controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 import org.generation.joyaDelCaribe.model.Producto;
@@ -27,7 +27,7 @@ public class ProductoController {
     }   
     
     @GetMapping
-    public ArrayList<Producto> getProductos(){
+    public List<Producto> getProductos(){
         return productoService.getAllProductos();
     }
     

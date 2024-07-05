@@ -1,18 +1,43 @@
 package org.generation.joyaDelCaribe.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+//POJO
+
+@Entity
+@Table(name="producto")
 public class Producto {
+	@Id
+	@GeneratedValue(strategy = GeneationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false)
 	private int idProducto;
+	@Column(nullable=false)
 	private String name;
+	@Column(nullable=false)
 	private String product;
+	@Column(nullable=false)
 	private Double price;
+	@Column(nullable=false)
 	private String image;
+	@Column(nullable=false)
 	private String category;
+	@Column(nullable=false)
 	private String description;
-	private Double discount; //Descuento debe ser en decimal
+	@Column(nullable=false)
+	private Double discount;//Descuento debe ser en decimal
+	@Column(nullable=false)
 	private Integer idUser;
+	@Column(nullable=false)
 	private Integer idOrden;
+	@Column(nullable=false)
 	private static int total = 0;
-	
+	@Column(nullable=false)
+
 	public Producto(String name, String product, Double price, String image, String category, String description,
 			Double discount, Integer idUser, Integer idOrden) {
 		super();
