@@ -1,13 +1,30 @@
 package org.generation.joyaDelCaribe.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usuarios")
+
 public class Usuario {
-	private int idUser;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false)
+	private Long idUser;
+	@Column(nullable=false)
 	private String name;
+	@Column(nullable=false)
 	private String lastName;
+	@Column(nullable=false)
 	private String phone;
+	@Column(nullable=false)
 	private String email;
+	@Column(nullable=false)
 	private String password;
-	private static int total = 0;
 	
 	public Usuario(String name, String lastName, String phone, String email, String password) {
 		super();
@@ -16,13 +33,9 @@ public class Usuario {
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
-		Usuario.total++;
-		this.idUser = total;
 	}
 
 	public Usuario() {
-		Usuario.total++;
-		this.idUser = total;
 	}
 
 	public String getName() {
@@ -65,15 +78,13 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public int getIdUser() {
+	public Long getIdUser() {
 		return idUser;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + idUser + ", name=" + name + ", lastName=" + lastName + ", phone=" + phone + ", email="
-				+ email + ", password=" + password + "]";
-	}
-	
-		
+		return "Usuario [idUser=" + idUser + ", name=" + name + ", lastName=" + lastName + ", phone=" + phone
+				+ ", email=" + email + ", password=" + password + "]";
+	}	
 }

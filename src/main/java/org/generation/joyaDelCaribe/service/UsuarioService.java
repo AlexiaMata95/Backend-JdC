@@ -1,86 +1,80 @@
 package org.generation.joyaDelCaribe.service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.generation.joyaDelCaribe.model.ChangePassword;
-import org.generation.joyaDelCaribe.model.Producto;
 import org.generation.joyaDelCaribe.model.Usuario;
+import org.generation.joyaDelCaribe.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService {
-	public final ArrayList<Usuario> listaUser = new ArrayList<Usuario>();
-	
+	public final UsuarioRepository usuarioRepository;
+
 	@Autowired
-	public UsuarioService() {
-		listaUser.add(new Usuario("Sofía","Sanchez","5512345678","sofia@gmail.com","7412369*Lo"));
-		listaUser.add(new Usuario("Laura","Martínez","5598765421","laura@gmail.com","7412369*Li"));
-		listaUser.add(new Usuario("Lucía","García","5515975312","lucia@gmail.com","7412369*Lu"));
-	}
-	
-	public ArrayList<Usuario> getAllUsers(){
-		return listaUser;
+	private PasswordEncoder encoder;
+
+	@Autowired
+	public UsuarioService(UsuarioRepository usuarioRepository) {
+		this.usuarioRepository = usuarioRepository;
 	}
 
-	public ArrayList<Usuario> getUser() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Usuario> getAllUsers() {
+		return usuarioRepository.findAll();
 	}
 
-	public Usuario getUser(int id) {
+	public Usuario getUser(Long id) {
+		return usuarioRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("El usuario con el id [" + id + "] no existe"));
+	}
+
+	public Usuario deleteUsuario(Long id) {
 		Usuario tmpUser = null;
-		for (Usuario usuario : listaUser) {
-			if(usuario.getIdUser()==id) {
-				tmpUser = usuario;
-				break;
-			}
-		}
-		return tmpUser;
-	}
-
-	public Usuario deleteUsuario(int id) {
-		Usuario tmpUser = null;
-		for (Usuario usuario : listaUser) {
-			if (usuario.getIdUser() == id) {
-				tmpUser= listaUser.remove(listaUser.indexOf(usuario));
-				break;
-			}
+		if (usuarioRepository.existsById(id)) {
+			tmpUser = usuarioRepository.findById(id).get();
+			usuarioRepository.deleteById(id);
 		}
 		return tmpUser;
 	}
 
 	public Usuario addUsuario(Usuario usuario) {
-		Usuario tmpUser = null;
-		boolean userExists = false;
-		for (Usuario user : listaUser) {
-			if(user.getEmail().equals(usuario.getEmail())) {
-				userExists = true;
-				break;
-			}
+		Optional<Usuario> tmpUser = usuarioRepository.findByEmail(usuario.getEmail());
+		if (tmpUser.isEmpty()) {
+			usuario.setPassword(encoder.encode(usuario.getPassword()));
+			return usuarioRepository.save(usuario);
+		}else {
+			System.out.println("El usuario con el nombre [] ya existe");
+			return null;
 		}
-		if(!userExists) {
-			listaUser.add(usuario);
-			tmpUser = usuario;
+	}
+
+	public Usuario updateUser(Long id, ChangePassword changePassword) {
+		Usuario tmpUser = null;
+		if (usuarioRepository.existsById(id)) {
+			tmpUser = usuarioRepository.findById(id).get();
+			if(encoder.matches(changePassword.getPassword(), tmpUser.getPassword())) {
+				tmpUser.setPassword(encoder.encode(changePassword.getNpassword()));
+				usuarioRepository.save(tmpUser);
+			}else {
+				System.out.println("updateUser - El password del usuario [" + id + "] no coincide");
+				tmpUser = null;
+			}
 		}
 		return tmpUser;
 	}
-
-	public Usuario updateUser(int id, ChangePassword changePassword) {
-		Usuario tmpUser = null;
-		for (Usuario usuario : listaUser) {
-			if (usuario.getIdUser()==id) {
-				tmpUser = usuario;
-				if(changePassword.getPassword().equals(tmpUser.getPassword())) {
-					tmpUser.setPassword(changePassword.getNpassword());
-					return usuario;
-				}else {
-					return null;
-				}
+	
+	public boolean validateUser(Usuario usuario) {
+		Optional<Usuario> userByEmail = usuarioRepository.findByEmail(usuario.getEmail());
+		if(userByEmail.isPresent()) {
+			Usuario tmpUser = userByEmail.get();
+			if(encoder.matches(usuario.getPassword(), tmpUser.getPassword())) {
+				return true;
 			}
 		}
-		return null;
+		return false;
 	}
-
 
 }

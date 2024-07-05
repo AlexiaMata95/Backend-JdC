@@ -1,6 +1,6 @@
 package org.generation.joyaDelCaribe.controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.generation.joyaDelCaribe.model.ChangePassword;
 import org.generation.joyaDelCaribe.model.Usuario;
@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 @RestController
 @RequestMapping(path = "/api/usuarios/")
 public class UsuarioController {
@@ -28,17 +26,17 @@ public class UsuarioController {
 	}
 	
 	@GetMapping
-	public ArrayList<Usuario> getUsuarios() {
+	public List<Usuario> getUsuarios() {
 		return usuarioService.getAllUsers();
 	}
 	
 	@GetMapping(path = "{userId}")
-	public Usuario getUsuario(@PathVariable("userId") int id) {
+	public Usuario getUsuario(@PathVariable("userId") Long id) {
 		return usuarioService.getUser(id);
 	}
 	
 	@DeleteMapping(path = "{userId}")
-	public Usuario deleteUsuario(@PathVariable("userId") int id) {
+	public Usuario deleteUsuario(@PathVariable("userId") Long id) {
 		return usuarioService.deleteUsuario(id);
 	}
 	
@@ -48,7 +46,7 @@ public class UsuarioController {
 	}
 	
 	@PutMapping(path = "{userId}")
-	public Usuario updateUsuario(@RequestBody ChangePassword changePassword, @PathVariable("userId") int id) {
+	public Usuario updateUsuario(@RequestBody ChangePassword changePassword, @PathVariable("userId") Long id) {
 		return usuarioService.updateUser(id, changePassword);
 	};
 }
