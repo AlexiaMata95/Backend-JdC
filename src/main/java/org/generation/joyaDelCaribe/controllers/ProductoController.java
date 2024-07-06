@@ -1,7 +1,6 @@
 package org.generation.joyaDelCaribe.controllers;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 import org.generation.joyaDelCaribe.model.Producto;
 import org.generation.joyaDelCaribe.service.ProductoService;
@@ -27,17 +26,17 @@ public class ProductoController {
     }   
     
     @GetMapping
-    public ArrayList<Producto> getProductos(){
+    public List<Producto> getProductos(){
         return productoService.getAllProductos();
     }
     
     @GetMapping(path = "{productoId}")
-    public Producto getProducto(@PathVariable("productoId") int id) {
+    public Producto getProducto(@PathVariable("productoId") Long id) {
         return productoService.getProducto(id);
     }
     
     @DeleteMapping(path = "{productoId}")
-    public Producto deleteProducto(@PathVariable("productoId") int id) {
+    public Producto deleteProducto(@PathVariable("productoId") Long id) {
         return productoService.deleteProducto(id);
     }
     
@@ -47,7 +46,7 @@ public class ProductoController {
     }
     
     @PutMapping(path = "{productoId}")
-    public Producto updateProducto(@PathVariable("productoId") int id,
+    public Producto updateProducto(@PathVariable("productoId") Long id,
 			@RequestParam(required = false) String name,
 			@RequestParam(required = false) String product,
 			@RequestParam(required = false) Double price,
@@ -59,7 +58,7 @@ public class ProductoController {
 			@RequestParam(required = false) Integer idOrden){
         return productoService.updateProducto(id, name,product,price, image, category, description,
     			discount, idUser,idOrden);
-    }
-    
+    };
+   
 }
 

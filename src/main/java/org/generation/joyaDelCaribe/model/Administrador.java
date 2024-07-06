@@ -1,23 +1,37 @@
 package org.generation.joyaDelCaribe.model;
+//POJO
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity //tabla
+@Table(name="administrador")
 public class Administrador {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idadministrador", unique=true, nullable=false)
+	private Long idAdmin;
+	@Column(nullable = false)
 	private String email;
+	@Column(nullable = false)
 	private String password;
-	private int idAdmin;
-	private static int total;
 	
 	public Administrador(String email, String password) {
+		super();
 		this.email = email;
 		this.password = password;
-		Administrador.total++;
-		this.idAdmin = total;
-		
+	}
+	
+	public Administrador() {}
+
+	public Long getIdAdmin() {
+		return idAdmin;
 	}
 
-	public Administrador() {
-		Administrador.total++;
-		this.idAdmin = total;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -34,13 +48,8 @@ public class Administrador {
 		this.password = password;
 	}
 
-	public int getIdAdmin() {
-		return idAdmin;
-	}
-
 	@Override
 	public String toString() {
-		return "Administrador [Id=" + idAdmin + ", email=" + email + ", password=" + password + "]";
-	};	
-		
+		return "Administrador [idAdmin=" + idAdmin + ", email=" + email + ", password=" + password + "]";
+	}
 }

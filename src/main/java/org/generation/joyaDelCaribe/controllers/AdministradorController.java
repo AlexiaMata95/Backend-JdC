@@ -1,6 +1,8 @@
 package org.generation.joyaDelCaribe.controllers;
 
-import java.util.ArrayList;
+
+
+import java.util.List;
 
 import org.generation.joyaDelCaribe.model.Administrador;
 import org.generation.joyaDelCaribe.service.AdministradorService;
@@ -26,17 +28,17 @@ public class AdministradorController {
 	}	
 	
 	@GetMapping
-	public ArrayList<Administrador> getAdministradores(){
+	public List<Administrador> getAdministradores(){
 		return adminService.getAllAdmins();
 	}
 	
 	@GetMapping(path = "{adminId}")
-	public Administrador getAdministrador(@PathVariable("adminId") int id) {
+	public Administrador getAdministrador(@PathVariable("adminId") Long id) {
 		return adminService.getAdmin(id);
 	}
 	
 	@DeleteMapping(path = "{adminId}")
-	public Administrador deleteAdmin(@PathVariable("adminId") int id) {
+	public Administrador deleteAdmin(@PathVariable("adminId") Long id) {
 		return adminService.deleteAdmin(id);
 	}
 	
@@ -46,7 +48,7 @@ public class AdministradorController {
 	}
 	
 	@PutMapping(path = "{adminId}")
-	public Administrador updateAdmin(@PathVariable("adminId") int id,
+	public Administrador updateAdmin(@PathVariable("adminId") Long id,
 			@RequestParam(required = false) String email,
 			@RequestParam(required = false) String password) {
 		return adminService.updateAdmin(id, email, password);

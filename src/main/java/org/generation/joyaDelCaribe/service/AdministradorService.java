@@ -1,76 +1,63 @@
 package org.generation.joyaDelCaribe.service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.generation.joyaDelCaribe.model.Administrador;
+import org.generation.joyaDelCaribe.repository.AdministradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AdministradorService {
-	ArrayList<Administrador> listaAdmin = new ArrayList<Administrador>();
+	public final AdministradorRepository administradorRepository;
 	
 	@Autowired
-	public AdministradorService() { // Va a agregarle datos a la lista 
-		listaAdmin.add( new Administrador("alexia@bootcamp.com", "UnaContra12"));
-		listaAdmin.add( new Administrador("alan@bootcamp.com", "UnaContra13"));
-		listaAdmin.add( new Administrador("esdras@bootcamp.com", "UnaContra14"));
-		listaAdmin.add( new Administrador("diana@bootcamp.com", "UnaContra15"));
+	public AdministradorService(AdministradorRepository administradorRepository) { // Va a agregarle datos a la lista 
+		this.administradorRepository = administradorRepository;
 	}
 
-	public ArrayList<Administrador> getAllAdmins() {
-		return listaAdmin;
+	public List<Administrador> getAllAdmins() {
+		return administradorRepository.findAll();
 	}
 
-	public Administrador getAdmin(int id) {
+	public Administrador getAdmin(Long id) {
 		Administrador tmpAdmin = null;
-		for (Administrador administrador : listaAdmin) {
-			if(administrador.getIdAdmin() == id) {
-				tmpAdmin = administrador;
-				break;
+		if (administradorRepository.existsById(id)) {
+			tmpAdmin = administradorRepository.findById(id).get();
+			administradorRepository.deleteById(id);
 			}
-		}
 		return tmpAdmin;
-	}
-
-	public Administrador deleteAdmin(int id) {
-		Administrador tmpAdmin = null;
-		for (Administrador administrador : listaAdmin) {
-			if(administrador.getIdAdmin() == id) {
-				tmpAdmin = administrador;
-				listaAdmin.remove(listaAdmin.indexOf(administrador));
-				break;
-			}
 		}
+
+	public Administrador deleteAdmin(Long id) {
+		Administrador tmpAdmin = null;
+			if(administradorRepository.existsById(id)) {
+				tmpAdmin = administradorRepository.findById(id).get();
+				administradorRepository.deleteById(id);
+			}
 		return tmpAdmin;
 	}
 
 	public Administrador addAdmin(Administrador admin) {
-		Administrador tmpAdmin = null;
-		boolean adminExists = false;
-		for (Administrador administrador : listaAdmin) {
-			if(administrador.getEmail().equals(admin.getEmail())) {
-				adminExists = true;
-				break;
+		Optional<Administrador> tmpAdmin = administradorRepository.findByEmail(admin.getEmail());
+			if(tmpAdmin.isEmpty()) {
+				return administradorRepository.save(admin);
+			}else {
+				System.out.println("El admin con el nombre [] ya existe");
+				return null;
 			}
-		}
-		if(!adminExists) {
-			listaAdmin.add(admin);
-			tmpAdmin = admin;
-		}
-		return tmpAdmin;
 	}
 
-	public Administrador updateAdmin(int id, String email, String password) {
+	public Administrador updateAdmin(Long id, String email, String password) {
 		Administrador tmpAdmin = null;
-		for (Administrador administrador : listaAdmin) {
-			if(administrador.getIdAdmin() == id) {
+			if(administradorRepository.existsById(id)) {
+				Administrador administrador = administradorRepository.findById(id).get();
 				if (email != null) { administrador.setEmail(email); }
 				if (password != null) { administrador.setPassword(password); }
-				tmpAdmin = administrador;
-				break;
+				administradorRepository.save(administrador);
+				tmpAdmin=administrador;
 			}
-		}
 		return tmpAdmin;
 	}
 			
