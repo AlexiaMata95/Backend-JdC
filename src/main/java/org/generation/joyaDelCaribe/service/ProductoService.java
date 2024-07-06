@@ -52,14 +52,13 @@ public class ProductoService {
 			if(productoRepository.existsById(id)) {
 				Producto producto=productoRepository.findById(id).get();
                 if (name != null){producto.setName(name);}
-                if (product != null){producto.setProduct(product);}
                 if (price != null){producto.setPrice(price);}
-                if (image != null){producto.setImage(image);}
+                if (image != null){producto.setImg(image);}
                 if (category != null){producto.setCategory(category);}
                 if (description != null){producto.setDescription(description);}
                 if (discount != null){producto.setDiscount(discount);}
-                //if (idUser != null){producto.setIdUser(idUser);}
-                //if (idOrden != null){producto.setIdOrden(idOrden);}
+                if (idOrden != null){producto.setIdorden(idOrden);}
+                if (idUser != null){producto.setIdusuario(idUser);}
                 productoRepository.save(producto);
 				tmpProd=producto;
 			}

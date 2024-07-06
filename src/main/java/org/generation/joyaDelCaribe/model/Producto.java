@@ -10,15 +10,15 @@ import javax.persistence.Table;
 //POJO
 
 @Entity
-@Table(name="productos")
+@Table(name="productss")
 public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idproductos", unique=true, nullable=false)
+	@Column(name="id", unique=true, nullable=false)
 	private Long idproductos;
-	@Column(nullable=true)
+	@Column(nullable=false)
 	private String name;
-	@Column(nullable=true)
+	@Column(nullable=false)
 	private String product;
 	@Column(nullable=false)
 	private Double price;
@@ -26,9 +26,9 @@ public class Producto {
 	private String img;
 	@Column(nullable=false)
 	private String category;
-	@Column(nullable=true)
+
 	private String description;
-	@Column(nullable=true)
+
 	private Double discount;//Descuento debe ser en decimal
 	@Column(nullable=false)
 	private Integer idorden;
@@ -36,20 +36,31 @@ public class Producto {
 	private Integer idusuario;
 
 
-	public Producto(String name, String product, Double price, String image, String category, String description,
-			Double discount, Integer idUser, Integer idOrden) {
+
+
+	public Producto(String name, String product, Double price, String img, String category, String description,
+			Double discount, Integer idorden, Integer idusuario) {
+		super();
 		this.name = name;
 		this.product = product;
 		this.price = price;
-		this.img = image;
+		this.img = img;
 		this.category = category;
 		this.description = description;
 		this.discount = discount;
-		this.idusuario = idUser;
-		this.idorden = idOrden;
+		this.idorden = idorden;
+		this.idusuario = idusuario;
 	}
 
 	public Producto() {
+	}
+
+	public Long getIdproductos() {
+		return idproductos;
+	}
+
+	public void setIdproductos(Long idproductos) {
+		this.idproductos = idproductos;
 	}
 
 	public String getName() {
@@ -64,10 +75,6 @@ public class Producto {
 		return product;
 	}
 
-	public void setProduct(String product) {
-		this.product = product;
-	}
-
 	public Double getPrice() {
 		return price;
 	}
@@ -76,12 +83,12 @@ public class Producto {
 		this.price = price;
 	}
 
-	public String getImage() {
+	public String getImg() {
 		return img;
 	}
 
-	public void setImage(String image) {
-		this.img = image;
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public String getCategory() {
@@ -108,31 +115,32 @@ public class Producto {
 		this.discount = discount;
 	}
 
-	public Long getIdProducto() {
-		return idproductos;
+	public Integer getIdorden() {
+		return idorden;
 	}
 
-	public Integer getIdUser() {
+	public void setIdorden(Integer idorden) {
+		this.idorden = idorden;
+	}
+
+	public Integer getIdusuario() {
 		return idusuario;
 	}
 
-	//public void setIdUser(Integer idUser) {
-	//	this.idusuario = idUser;
-	//}
-
-	public Integer getIdOrden() {
-		return idorden;
+	public void setIdusuario(Integer idusuario) {
+		this.idusuario = idusuario;
 	}
-	
-	//public void setIdOrden(Integer idOrden) {
-	//	this.idorden = idOrden;
-	//}
 
 	@Override
 	public String toString() {
-		return "Producto [idProducto=" + idproductos + ", name=" + name + ", product=" + product + ", price=" + price
-				+ ", image=" + img + ", category=" + category + ", description=" + description + ", discount="
-				+ discount + ", idUser=" + idusuario + ", idOrden=" + idorden + "]";
+		return "Producto [idproductos=" + idproductos + ", name=" + name + ", product=" + product + ", price=" + price
+				+ ", img=" + img + ", category=" + category + ", description=" + description + ", discount=" + discount
+				+ ", idorden=" + idorden + ", idusuario=" + idusuario + "]";
 	}
+	
+	
+
+
+
 		
 }

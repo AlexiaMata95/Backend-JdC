@@ -54,8 +54,8 @@ public class ProductoController {
 			@RequestParam(required = false) String category,
 			@RequestParam(required = false) String description,
 			@RequestParam(required = false) Double discount,
-			@RequestParam(required = false) Integer idUser,
-			@RequestParam(required = false) Integer idOrden){
+			@RequestParam(required = false) Integer idOrden,
+			@RequestParam(required = false) Integer idUser){
         return productoService.updateProducto(id, name,product,price, image, category, description,
     			discount, idUser,idOrden);
     };
