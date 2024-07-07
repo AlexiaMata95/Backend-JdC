@@ -49,14 +49,13 @@ public class OrdenService {
 		}
 	}//addOrden
 
-	public Orden updateOrden(Long id, Integer idUser, Date date, Integer quantity, Double price) {
+	public Orden updateOrden(Long id, Date date, Double price, Integer idUser) {
 		Orden tmpOrden = null;
 			if(ordenRepository.existsById(id)) {
 				Orden orden=ordenRepository.findById(id).get();
-				if (idUser != null) { orden.setUsuarios_id(idUser); }
 				if (date != null) { orden.setFecha(date); }
-				if (quantity != null) { orden.setCantidad(quantity); }
-				if (price != null) { orden.setPrecio(price); }
+				if (price != null) { orden.setTotal(price); }
+				if (idUser != null) { orden.setUsuarios_id(idUser); }
 				ordenRepository.save(orden);
 				tmpOrden=orden;
 			}//if

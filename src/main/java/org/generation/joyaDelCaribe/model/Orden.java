@@ -21,16 +21,13 @@ public class Orden {
 	@Column(nullable=false)
 	private Date fecha;
 	@Column(nullable=false)
-	private Integer cantidad;
-	@Column(nullable=false)
-	private Double precio;
+	private Double total;
 	@Column(nullable=false)
 	private Integer usuarios_id;
 
-	public Orden(Integer usuarios_id, Date fecha, Integer cantidad, Double precio) {
+	public Orden(Date fecha, Double total, Integer usuarios_id) {
 		this.fecha = fecha;
-		this.cantidad = cantidad;
-		this.precio = precio;
+		this.total = total;
 		this.usuarios_id = usuarios_id;
 	}
 
@@ -38,14 +35,6 @@ public class Orden {
 
 	public Long getIdOrden() {
 		return idOrden;
-	}
-
-	public Integer getUsuarios_id() {
-		return usuarios_id;
-	}
-
-	public void setUsuarios_id(Integer usuarios_id) {
-		this.usuarios_id = usuarios_id;
 	}
 
 	public Date getFecha() {
@@ -56,25 +45,25 @@ public class Orden {
 		this.fecha = fecha;
 	}
 
-	public Integer getCantidad() {
-		return cantidad;
+	public Double getTotal() {
+		return total;
 	}
 
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 
-	public Double getPrecio() {
-		return precio;
+	public Integer getUsuarios_id() {
+		return usuarios_id;
 	}
 
-	public void setPrecio(Double precio) {
-		this.precio = precio;
+	public void setUsuarios_id(Integer usuarios_id) {
+		this.usuarios_id = usuarios_id;
 	}
 
 	@Override
 	public String toString() {
-		return "Orden [idOrden=" + idOrden + ", usuarios_id=" + usuarios_id + ", fecha=" + fecha + ", cantidad="
-				+ cantidad + ", precio=" + precio + "]";
+		return "Orden [idOrden=" + idOrden + ", fecha=" + fecha + ", total=" + total + ", usuarios_id=" + usuarios_id
+				+ "]";
 	}
 }

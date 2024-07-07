@@ -49,11 +49,10 @@ public class OrdenController {
 	@PutMapping(path = "{ordenId}")
 	public Orden updateOrden(@PathVariable("ordenId") Long id,
 			@RequestParam(required = false) Date fecha,
-			@RequestParam(required = false) Integer cantidad,
-			@RequestParam(required = false) Double precio,
+			@RequestParam(required = false) Double total,
 			@RequestParam(required = false) Integer usuarios_id)
 	{
-		return ordenService.updateOrden(id, usuarios_id, fecha, cantidad, precio);
+		return ordenService.updateOrden(id, fecha, total, usuarios_id);
 	}
 	
 }//class OrdenController
