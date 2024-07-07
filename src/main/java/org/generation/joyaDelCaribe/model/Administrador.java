@@ -9,47 +9,49 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity //tabla
-@Table(name="administrador")
+@Table(name="administradores")
 public class Administrador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idadministrador", unique=true, nullable=false)
+	@Column(name="id", unique=true, nullable=false)
 	private Long idAdmin;
 	@Column(nullable = false)
-	private String email;
+	private String correo;
 	@Column(nullable = false)
-	private String password;
+	private String contrasena;
 	
-	public Administrador(String email, String password) {
+	public Administrador(String correo, String contrasena) {
 		super();
-		this.email = email;
-		this.password = password;
+		this.correo = correo;
+		this.contrasena = contrasena;
 	}
-	
+
 	public Administrador() {}
 
 	public Long getIdAdmin() {
 		return idAdmin;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getCorreo() {
+		return correo;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getContrasena() {
+		return contrasena;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	@Override
 	public String toString() {
-		return "Administrador [idAdmin=" + idAdmin + ", email=" + email + ", password=" + password + "]";
+		return "Administrador [idAdmin=" + idAdmin + ", correo=" + correo + ", contrasena=" + contrasena + "]";
 	}
+
+	
 }

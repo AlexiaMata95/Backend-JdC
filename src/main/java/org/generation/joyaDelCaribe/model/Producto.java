@@ -10,137 +10,125 @@ import javax.persistence.Table;
 //POJO
 
 @Entity
-@Table(name="productss")
+@Table(name="productos")
 public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id", unique=true, nullable=false)
 	private Long idproductos;
 	@Column(nullable=false)
-	private String name;
+	private String nombre;
 	@Column(nullable=false)
-	private String product;
+	private String producto;
 	@Column(nullable=false)
-	private Double price;
+	private Double precio;
 	@Column(nullable=false)
-	private String img;
+	private String imagen;
 	@Column(nullable=false)
-	private String category;
-
-	private String description;
-
-	private Double discount;//Descuento debe ser en decimal
+	private String categoria;
+	private String descripcion;
+	private Double descuento;//Descuento debe ser en decimal
 	@Column(nullable=false)
-	private Integer idorden;
+	private Integer orden_compras_id;
 	@Column(nullable=false)
-	private Integer idusuario;
+	private Integer orden_compras_usuarios_id;
 
-
-
-
-	public Producto(String name, String product, Double price, String img, String category, String description,
-			Double discount, Integer idorden, Integer idusuario) {
-		super();
-		this.name = name;
-		this.product = product;
-		this.price = price;
-		this.img = img;
-		this.category = category;
-		this.description = description;
-		this.discount = discount;
-		this.idorden = idorden;
-		this.idusuario = idusuario;
+	public Producto(String nombre, String producto, Double precio, String imagen, String categoria, String descripcion,
+			Double descuento, Integer idorden, Integer idusuario) {
+		this.nombre = nombre;
+		this.producto = producto;
+		this.precio = precio;
+		this.imagen = imagen;
+		this.categoria = categoria;
+		this.descripcion = descripcion;
+		this.descuento = descuento;
+		this.orden_compras_id = idorden;
+		this.orden_compras_usuarios_id = idusuario;
 	}
 
-	public Producto() {
-	}
+	public Producto() {}
 
 	public Long getIdproductos() {
 		return idproductos;
 	}
 
-	public void setIdproductos(Long idproductos) {
-		this.idproductos = idproductos;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public String getName() {
-		return name;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getProducto() {
+		return producto;
 	}
 
-	public String getProduct() {
-		return product;
+	public void setProducto(String producto) {
+		this.producto = producto;
 	}
 
-	public Double getPrice() {
-		return price;
+	public Double getPrecio() {
+		return precio;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setPrecio(Double precio) {
+		this.precio = precio;
 	}
 
-	public String getImg() {
-		return img;
+	public String getImagen() {
+		return imagen;
 	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getCategoria() {
+		return categoria;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
-	public Double getDiscount() {
-		return discount;
+	public Double getDescuento() {
+		return descuento;
 	}
 
-	public void setDiscount(Double discount) {
-		this.discount = discount;
+	public void setDescuento(Double descuento) {
+		this.descuento = descuento;
 	}
 
-	public Integer getIdorden() {
-		return idorden;
+	public Integer getOrden_compras_id() {
+		return orden_compras_id;
 	}
 
-	public void setIdorden(Integer idorden) {
-		this.idorden = idorden;
+	public void setOrden_compras_id(Integer orden_compras_id) {
+		this.orden_compras_id = orden_compras_id;
 	}
 
-	public Integer getIdusuario() {
-		return idusuario;
+	public Integer getOrden_compras_usuarios_id() {
+		return orden_compras_usuarios_id;
 	}
 
-	public void setIdusuario(Integer idusuario) {
-		this.idusuario = idusuario;
+	public void setOrden_compras_usuarios_id(Integer orden_compras_usuarios_id) {
+		this.orden_compras_usuarios_id = orden_compras_usuarios_id;
 	}
 
 	@Override
 	public String toString() {
-		return "Producto [idproductos=" + idproductos + ", name=" + name + ", product=" + product + ", price=" + price
-				+ ", img=" + img + ", category=" + category + ", description=" + description + ", discount=" + discount
-				+ ", idorden=" + idorden + ", idusuario=" + idusuario + "]";
+		return "Producto [idproductos=" + idproductos + ", nombre=" + nombre + ", producto=" + producto + ", precio="
+				+ precio + ", imagen=" + imagen + ", categoria=" + categoria + ", descripcion=" + descripcion
+				+ ", descuento=" + descuento + ", orden_compras_id=" + orden_compras_id + ", orden_compras_usuarios_id="
+				+ orden_compras_usuarios_id + "]";
 	}
-	
-	
-
-
-
-		
 }

@@ -40,21 +40,21 @@ public class AdministradorService {
 	}
 
 	public Administrador addAdmin(Administrador admin) {
-		Optional<Administrador> tmpAdmin = administradorRepository.findByEmail(admin.getEmail());
+		Optional<Administrador> tmpAdmin = administradorRepository.findByCorreo(admin.getCorreo());
 			if(tmpAdmin.isEmpty()) {
 				return administradorRepository.save(admin);
 			}else {
-				System.out.println("El admin con el nombre [] ya existe");
+				System.out.println("El admin con el correo ["+admin.getCorreo()+"] ya existe");
 				return null;
 			}
 	}
 
-	public Administrador updateAdmin(Long id, String email, String password) {
+	public Administrador updateAdmin(Long id, String correo, String contrasena) {
 		Administrador tmpAdmin = null;
 			if(administradorRepository.existsById(id)) {
 				Administrador administrador = administradorRepository.findById(id).get();
-				if (email != null) { administrador.setEmail(email); }
-				if (password != null) { administrador.setPassword(password); }
+				if (correo != null) { administrador.setCorreo(correo); }
+				if (contrasena != null) { administrador.setContrasena(contrasena); }
 				administradorRepository.save(administrador);
 				tmpAdmin=administrador;
 			}

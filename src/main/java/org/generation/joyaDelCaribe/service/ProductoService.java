@@ -37,7 +37,7 @@ public class ProductoService {
 	}
 
 	public Producto addProducto(Producto producto) {
-		Optional<Producto> tmpProd = productoRepository.findByName(producto.getName());
+		Optional<Producto> tmpProd = productoRepository.findByNombre(producto.getNombre());
 		if(tmpProd.isEmpty()) {
 			return productoRepository.save(producto);
 		}else {
@@ -51,14 +51,15 @@ public class ProductoService {
 		Producto tmpProd = null;
 			if(productoRepository.existsById(id)) {
 				Producto producto=productoRepository.findById(id).get();
-                if (name != null){producto.setName(name);}
-                if (price != null){producto.setPrice(price);}
-                if (image != null){producto.setImg(image);}
-                if (category != null){producto.setCategory(category);}
-                if (description != null){producto.setDescription(description);}
-                if (discount != null){producto.setDiscount(discount);}
-                if (idOrden != null){producto.setIdorden(idOrden);}
-                if (idUser != null){producto.setIdusuario(idUser);}
+                if (name != null){producto.setNombre(name);}
+                if (product != null){producto.setProducto(product);}
+                if (price != null){producto.setPrecio(price);}
+                if (image != null){producto.setImagen(image);}
+                if (category != null){producto.setCategoria(category);}
+                if (description != null){producto.setDescripcion(description);}
+                if (discount != null){producto.setDescuento(discount);}
+                if (idOrden != null){producto.setOrden_compras_id(idOrden);}
+                if (idUser != null){producto.setOrden_compras_usuarios_id(idUser);}
                 productoRepository.save(producto);
 				tmpProd=producto;
 			}

@@ -41,9 +41,9 @@ public class UsuarioService {
 	}
 
 	public Usuario addUsuario(Usuario usuario) {
-		Optional<Usuario> tmpUser = usuarioRepository.findByEmail(usuario.getEmail());
+		Optional<Usuario> tmpUser = usuarioRepository.findByCorreo(usuario.getCorreo());
 		if (tmpUser.isEmpty()) {
-			usuario.setPassword(encoder.encode(usuario.getPassword()));
+			usuario.setContrasena(encoder.encode(usuario.getContrasena()));
 			return usuarioRepository.save(usuario);
 		}else {
 			System.out.println("El usuario con el nombre [] ya existe");
@@ -55,8 +55,8 @@ public class UsuarioService {
 		Usuario tmpUser = null;
 		if (usuarioRepository.existsById(id)) {
 			tmpUser = usuarioRepository.findById(id).get();
-			if(encoder.matches(changePassword.getPassword(), tmpUser.getPassword())) {
-				tmpUser.setPassword(encoder.encode(changePassword.getNpassword()));
+			if(encoder.matches(changePassword.getPassword(), tmpUser.getContrasena())) {
+				tmpUser.setContrasena(encoder.encode(changePassword.getNpassword()));
 				usuarioRepository.save(tmpUser);
 			}else {
 				System.out.println("updateUser - El password del usuario [" + id + "] no coincide");
@@ -67,10 +67,10 @@ public class UsuarioService {
 	}
 	
 	public boolean validateUser(Usuario usuario) {
-		Optional<Usuario> userByEmail = usuarioRepository.findByEmail(usuario.getEmail());
+		Optional<Usuario> userByEmail = usuarioRepository.findByCorreo(usuario.getCorreo());
 		if(userByEmail.isPresent()) {
 			Usuario tmpUser = userByEmail.get();
-			if(encoder.matches(usuario.getPassword(), tmpUser.getPassword())) {
+			if(encoder.matches(usuario.getContrasena(), tmpUser.getContrasena())) {
 				return true;
 			}
 		}

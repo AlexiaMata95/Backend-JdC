@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
+@Table(name="usuarios")
 
 public class Usuario {
 	@Id
@@ -16,75 +16,73 @@ public class Usuario {
 	@Column(name="id", unique=true, nullable=false)
 	private Long idUser;
 	@Column(nullable=false)
-	private String name;
+	private String nombre;
 	@Column(nullable=false)
-	private String lastName;
+	private String apellido;
 	@Column(nullable=false)
-	private String phone;
+	private String telefono;
 	@Column(nullable=false)
-	private String email;
+	private String correo;
 	@Column(nullable=false)
-	private String password;
+	private String contrasena;
 	
-	public Usuario(String name, String lastName, String phone, String email, String password) {
-		super();
-		this.name = name;
-		this.lastName = lastName;
-		this.phone = phone;
-		this.email = email;
-		this.password = password;
+	public Usuario(String nombre, String apellido, String telefono, String correo, String contrasena) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.telefono = telefono;
+		this.correo = correo;
+		this.contrasena = contrasena;
 	}
-
-	public Usuario() {
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
+	public Usuario() {}
 
 	public Long getIdUser() {
 		return idUser;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [idUser=" + idUser + ", name=" + name + ", lastName=" + lastName + ", phone=" + phone
-				+ ", email=" + email + ", password=" + password + "]";
-	}	
+		return "Usuario [idUser=" + idUser + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono
+				+ ", correo=" + correo + ", contrasena=" + contrasena + "]";
+	}
 }

@@ -12,78 +12,69 @@ import javax.persistence.Table;
 //POJO
 
 @Entity //tabla en base de datos
-@Table(name="ordenes")
+@Table(name="orden_compras")
 public class Orden {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id", unique=true, nullable=false)
 	private Long idOrden;
 	@Column(nullable=false)
-	private Integer idUser;
+	private Date fecha;
 	@Column(nullable=false)
-	private Date date;
+	private Integer cantidad;
 	@Column(nullable=false)
-	private Integer quantity;
+	private Double precio;
 	@Column(nullable=false)
-	private Double price;
+	private Integer usuarios_id;
 
-
-	
-	public Orden(Integer idUser, Date date, Integer quantity, Double price) {
-		super();
-		this.idUser = idUser;
-		this.date = date;
-		this.quantity = quantity;
-		this.price = price;
-
-	}
-	
-	public Orden() {
-
-		}
-
-
-	public Date getDate() {
-		return date;
+	public Orden(Integer usuarios_id, Date fecha, Integer cantidad, Double precio) {
+		this.fecha = fecha;
+		this.cantidad = cantidad;
+		this.precio = precio;
+		this.usuarios_id = usuarios_id;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
+	public Orden() {}
 
 	public Long getIdOrden() {
 		return idOrden;
 	}
 
-	public int getIdUser() {
-		return idUser;
+	public Integer getUsuarios_id() {
+		return usuarios_id;
 	}
 
-	public void setIdUser(Integer idUser) {
-		this.idUser = idUser;
+	public void setUsuarios_id(Integer usuarios_id) {
+		this.usuarios_id = usuarios_id;
 	}
-	
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public Double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+
 	@Override
 	public String toString() {
-		return "Orden [id=" + idOrden + ", idUser=" + idUser + ", fecha=" + date + ", cantidad=" + quantity + ", precio="
-				+ price + "]";
-	};
-	
-	
+		return "Orden [idOrden=" + idOrden + ", usuarios_id=" + usuarios_id + ", fecha=" + fecha + ", cantidad="
+				+ cantidad + ", precio=" + precio + "]";
+	}
 }

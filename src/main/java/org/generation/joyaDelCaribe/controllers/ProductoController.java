@@ -47,17 +47,17 @@ public class ProductoController {
     
     @PutMapping(path = "{productoId}")
     public Producto updateProducto(@PathVariable("productoId") Long id,
-			@RequestParam(required = false) String name,
-			@RequestParam(required = false) String product,
-			@RequestParam(required = false) Double price,
-			@RequestParam(required = false) String image,
-			@RequestParam(required = false) String category,
-			@RequestParam(required = false) String description,
-			@RequestParam(required = false) Double discount,
-			@RequestParam(required = false) Integer idOrden,
-			@RequestParam(required = false) Integer idUser){
-        return productoService.updateProducto(id, name,product,price, image, category, description,
-    			discount, idUser,idOrden);
+			@RequestParam(required = false) String nombre,
+			@RequestParam(required = false) String producto,
+			@RequestParam(required = false) Double precio,
+			@RequestParam(required = false) String imagen,
+			@RequestParam(required = false) String categoria,
+			@RequestParam(required = false) String descripcion,
+			@RequestParam(required = false) Double descuento,
+			@RequestParam(required = false) Integer orden_compras_id,
+			@RequestParam(required = false) Integer orden_compras_usuarios_id){
+        return productoService.updateProducto(id, nombre,producto,precio, imagen, categoria, descripcion,
+    			descuento, orden_compras_usuarios_id,orden_compras_id);
     };
    
 }

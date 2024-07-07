@@ -40,11 +40,11 @@ public class OrdenService {
 	}//deleteOrden
 
 	public Orden addOrden(Orden orden) {
-		Optional<Orden> tmpOrden = ordenRepository.findByDate(orden.getDate());
+		Optional<Orden> tmpOrden = ordenRepository.findByIdOrden(orden.getIdOrden());
 		if (tmpOrden.isEmpty()) {
 			return ordenRepository.save(orden);
 		}else {
-			System.out.println("La orden con el nombre [] ya existe");
+			System.out.println("La orden con el id ["+ orden.getIdOrden() +"] ya existe");
 			return null;
 		}
 	}//addOrden
@@ -53,10 +53,10 @@ public class OrdenService {
 		Orden tmpOrden = null;
 			if(ordenRepository.existsById(id)) {
 				Orden orden=ordenRepository.findById(id).get();
-				if (idUser != null) { orden.setIdUser(idUser); }
-				if (date != null) { orden.setDate(date); }
-				if (quantity != null) { orden.setQuantity(quantity); }
-				if (price != null) { orden.setPrice(price); }
+				if (idUser != null) { orden.setUsuarios_id(idUser); }
+				if (date != null) { orden.setFecha(date); }
+				if (quantity != null) { orden.setCantidad(quantity); }
+				if (price != null) { orden.setPrecio(price); }
 				ordenRepository.save(orden);
 				tmpOrden=orden;
 			}//if

@@ -31,8 +31,8 @@ public class UserLoginController {
 	@PostMapping
 	public UserToken loginUser(@RequestBody Usuario usuario) throws ServletException {
 		if(usuarioService.validateUser(usuario)) {
-			System.out.println("Usuario válido" + usuario.getEmail());
-			return new UserToken(generateToken(usuario.getEmail()));
+			System.out.println("Usuario válido" + usuario.getContrasena());
+			return new UserToken(generateToken(usuario.getContrasena()));
 		}
 		throw new ServletException("Nombre de ususario o contraseña incorrectos.");
 	}

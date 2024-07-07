@@ -20,6 +20,7 @@ public class JoyaDelCaribeApplication {
 		registrationBean.addUrlPatterns("/api/productos/*");
 		registrationBean.addUrlPatterns("/api/usuarios/*");
 		registrationBean.addUrlPatterns("/api/ordenes/*");
+		registrationBean.addUrlPatterns("/api/administradores/*");
 		return registrationBean;
 	} 
 

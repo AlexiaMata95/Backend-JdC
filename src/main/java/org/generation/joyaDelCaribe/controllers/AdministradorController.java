@@ -49,9 +49,9 @@ public class AdministradorController {
 	
 	@PutMapping(path = "{adminId}")
 	public Administrador updateAdmin(@PathVariable("adminId") Long id,
-			@RequestParam(required = false) String email,
-			@RequestParam(required = false) String password) {
-		return adminService.updateAdmin(id, email, password);
+			@RequestParam(required = false) String correo,
+			@RequestParam(required = false) String contrasena) {
+		return adminService.updateAdmin(id, correo, contrasena);
 	}
 	
 }

@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdministradorRepository extends JpaRepository<Administrador, Long> {
-	Optional<Administrador> findByEmail(String email);
+	Optional<Administrador> findByCorreo(String correo);
 }
