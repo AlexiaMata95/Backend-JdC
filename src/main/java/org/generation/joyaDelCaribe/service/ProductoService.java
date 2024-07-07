@@ -47,7 +47,7 @@ public class ProductoService {
 	}
 
 	public Producto updateProducto(Long id, String name, String product, Double price, String image, String category, String description,
-			Double discount, Integer idUser, Integer idOrden) {
+			Double discount) {
 		Producto tmpProd = null;
 			if(productoRepository.existsById(id)) {
 				Producto producto=productoRepository.findById(id).get();
@@ -58,8 +58,6 @@ public class ProductoService {
                 if (category != null){producto.setCategoria(category);}
                 if (description != null){producto.setDescripcion(description);}
                 if (discount != null){producto.setDescuento(discount);}
-                if (idOrden != null){producto.setOrden_compras_id(idOrden);}
-                if (idUser != null){producto.setOrden_compras_usuarios_id(idUser);}
                 productoRepository.save(producto);
 				tmpProd=producto;
 			}

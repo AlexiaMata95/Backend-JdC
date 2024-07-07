@@ -12,7 +12,7 @@ import javax.persistence.Table;
 //POJO
 
 @Entity //tabla en base de datos
-@Table(name="orden_compras")
+@Table(name="orden")
 public class Orden {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

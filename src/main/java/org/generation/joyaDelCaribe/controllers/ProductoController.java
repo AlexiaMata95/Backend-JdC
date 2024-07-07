@@ -53,11 +53,9 @@ public class ProductoController {
 			@RequestParam(required = false) String imagen,
 			@RequestParam(required = false) String categoria,
 			@RequestParam(required = false) String descripcion,
-			@RequestParam(required = false) Double descuento,
-			@RequestParam(required = false) Integer orden_compras_id,
-			@RequestParam(required = false) Integer orden_compras_usuarios_id){
+			@RequestParam(required = false) Double descuento){
         return productoService.updateProducto(id, nombre,producto,precio, imagen, categoria, descripcion,
-    			descuento, orden_compras_usuarios_id,orden_compras_id);
+    			descuento);
     };
    
 }

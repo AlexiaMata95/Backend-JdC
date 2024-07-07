@@ -28,13 +28,9 @@ public class Producto {
 	private String categoria;
 	private String descripcion;
 	private Double descuento;//Descuento debe ser en decimal
-	@Column(nullable=false)
-	private Integer orden_compras_id;
-	@Column(nullable=false)
-	private Integer orden_compras_usuarios_id;
 
 	public Producto(String nombre, String producto, Double precio, String imagen, String categoria, String descripcion,
-			Double descuento, Integer idorden, Integer idusuario) {
+			Double descuento) {
 		this.nombre = nombre;
 		this.producto = producto;
 		this.precio = precio;
@@ -42,8 +38,6 @@ public class Producto {
 		this.categoria = categoria;
 		this.descripcion = descripcion;
 		this.descuento = descuento;
-		this.orden_compras_id = idorden;
-		this.orden_compras_usuarios_id = idusuario;
 	}
 
 	public Producto() {}
@@ -108,27 +102,10 @@ public class Producto {
 		this.descuento = descuento;
 	}
 
-	public Integer getOrden_compras_id() {
-		return orden_compras_id;
-	}
-
-	public void setOrden_compras_id(Integer orden_compras_id) {
-		this.orden_compras_id = orden_compras_id;
-	}
-
-	public Integer getOrden_compras_usuarios_id() {
-		return orden_compras_usuarios_id;
-	}
-
-	public void setOrden_compras_usuarios_id(Integer orden_compras_usuarios_id) {
-		this.orden_compras_usuarios_id = orden_compras_usuarios_id;
-	}
-
 	@Override
 	public String toString() {
 		return "Producto [idproductos=" + idproductos + ", nombre=" + nombre + ", producto=" + producto + ", precio="
 				+ precio + ", imagen=" + imagen + ", categoria=" + categoria + ", descripcion=" + descripcion
-				+ ", descuento=" + descuento + ", orden_compras_id=" + orden_compras_id + ", orden_compras_usuarios_id="
-				+ orden_compras_usuarios_id + "]";
+				+ ", descuento=" + descuento + ", orden_compras_id=" + "]";
 	}
 }
