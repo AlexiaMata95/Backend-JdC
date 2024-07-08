@@ -11,26 +11,27 @@ import javax.persistence.Table;
 
 //POJO
 
-@Entity //tabla en base de datos
-@Table(name="ordenes")
+@Entity // tabla en base de datos
+@Table(name = "ordenes")
 public class Orden {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
-	
+	@Column(name = "id", unique = true, nullable = false)
+
 	private int idOrden;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Integer idUser;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Date date;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Integer quantity;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Double price;
-	@Column(nullable=false)
-	private static int total =0;
-	@Column(nullable=false)
-	
+	@Column(nullable = false)
+	private static int total = 0;
+
+	@Column(nullable = false)
+
 	public Orden(Integer idUser, Date date, Integer quantity, Double price) {
 		super();
 		this.idUser = idUser;
@@ -40,12 +41,11 @@ public class Orden {
 		Orden.total++;
 		idOrden = total;
 	}
-	
+
 	public Orden() {
 		Orden.total++;
 		idOrden = total;
-		}
-
+	}
 
 	public Date getDate() {
 		return date;
@@ -82,12 +82,11 @@ public class Orden {
 	public void setIdUser(Integer idUser) {
 		this.idUser = idUser;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Orden [id=" + idOrden + ", idUser=" + idUser + ", fecha=" + date + ", cantidad=" + quantity + ", precio="
-				+ price + "]";
+		return "Orden [id=" + idOrden + ", idUser=" + idUser + ", fecha=" + date + ", cantidad=" + quantity
+				+ ", precio=" + price + "]";
 	};
-	
-	
+
 }

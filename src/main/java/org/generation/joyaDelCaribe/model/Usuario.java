@@ -8,7 +8,7 @@ public class Usuario {
 	private String email;
 	private String password;
 	private static int total = 0;
-	
+
 	public Usuario(String name, String lastName, String phone, String email, String password) {
 		super();
 		this.name = name;
@@ -74,6 +74,5 @@ public class Usuario {
 		return "Usuario [id=" + idUser + ", name=" + name + ", lastName=" + lastName + ", phone=" + phone + ", email="
 				+ email + ", password=" + password + "]";
 	}
-	
-		
+
 }

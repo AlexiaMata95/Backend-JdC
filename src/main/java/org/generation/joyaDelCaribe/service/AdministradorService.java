@@ -2,20 +2,21 @@ package org.generation.joyaDelCaribe.service;
 
 import java.util.ArrayList;
 
-import org.generation.joyaDelCaribe.model.Administrador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import src.main.java.org.generation.joyaDelCaribe.model.Administrador;
 
 @Service
 public class AdministradorService {
 	ArrayList<Administrador> listaAdmin = new ArrayList<Administrador>();
-	
+
 	@Autowired
-	public AdministradorService() { // Va a agregarle datos a la lista 
-		listaAdmin.add( new Administrador("alexia@bootcamp.com", "UnaContra12"));
-		listaAdmin.add( new Administrador("alan@bootcamp.com", "UnaContra13"));
-		listaAdmin.add( new Administrador("esdras@bootcamp.com", "UnaContra14"));
-		listaAdmin.add( new Administrador("diana@bootcamp.com", "UnaContra15"));
+	public AdministradorService() { // Va a agregarle datos a la lista
+		listaAdmin.add(new Administrador("alexia@bootcamp.com", "UnaContra12"));
+		listaAdmin.add(new Administrador("alan@bootcamp.com", "UnaContra13"));
+		listaAdmin.add(new Administrador("esdras@bootcamp.com", "UnaContra14"));
+		listaAdmin.add(new Administrador("diana@bootcamp.com", "UnaContra15"));
 	}
 
 	public ArrayList<Administrador> getAllAdmins() {
@@ -25,7 +26,7 @@ public class AdministradorService {
 	public Administrador getAdmin(int id) {
 		Administrador tmpAdmin = null;
 		for (Administrador administrador : listaAdmin) {
-			if(administrador.getIdAdmin() == id) {
+			if (administrador.getIdAdmin() == id) {
 				tmpAdmin = administrador;
 				break;
 			}
@@ -36,7 +37,7 @@ public class AdministradorService {
 	public Administrador deleteAdmin(int id) {
 		Administrador tmpAdmin = null;
 		for (Administrador administrador : listaAdmin) {
-			if(administrador.getIdAdmin() == id) {
+			if (administrador.getIdAdmin() == id) {
 				tmpAdmin = administrador;
 				listaAdmin.remove(listaAdmin.indexOf(administrador));
 				break;
@@ -49,12 +50,12 @@ public class AdministradorService {
 		Administrador tmpAdmin = null;
 		boolean adminExists = false;
 		for (Administrador administrador : listaAdmin) {
-			if(administrador.getEmail().equals(admin.getEmail())) {
+			if (administrador.getEmail().equals(admin.getEmail())) {
 				adminExists = true;
 				break;
 			}
 		}
-		if(!adminExists) {
+		if (!adminExists) {
 			listaAdmin.add(admin);
 			tmpAdmin = admin;
 		}
@@ -64,14 +65,18 @@ public class AdministradorService {
 	public Administrador updateAdmin(int id, String email, String password) {
 		Administrador tmpAdmin = null;
 		for (Administrador administrador : listaAdmin) {
-			if(administrador.getIdAdmin() == id) {
-				if (email != null) { administrador.setEmail(email); }
-				if (password != null) { administrador.setPassword(password); }
+			if (administrador.getIdAdmin() == id) {
+				if (email != null) {
+					administrador.setEmail(email);
+				}
+				if (password != null) {
+					administrador.setPassword(password);
+				}
 				tmpAdmin = administrador;
 				break;
 			}
 		}
 		return tmpAdmin;
 	}
-			
+
 }

@@ -8,11 +8,11 @@ public class Producto {
 	private String image;
 	private String category;
 	private String description;
-	private Double discount; //Descuento debe ser en decimal
+	private Double discount; // Descuento debe ser en decimal
 	private Integer idUser;
 	private Integer idOrden;
 	private static int total = 0;
-	
+
 	public Producto(String name, String product, Double price, String image, String category, String description,
 			Double discount, Integer idUser, Integer idOrden) {
 		super();
@@ -105,6 +105,7 @@ public class Producto {
 	public Integer getIdOrden() {
 		return idOrden;
 	}
+
 	public void setIdOrden(Integer idOrden) {
 		this.idOrden = idOrden;
 	}
@@ -115,5 +116,5 @@ public class Producto {
 				+ ", image=" + image + ", category=" + category + ", description=" + description + ", discount="
 				+ discount + ", idUser=" + idUser + ", idOrden=" + idOrden + "]";
 	}
-		
+
 }
