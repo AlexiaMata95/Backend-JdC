@@ -42,7 +42,7 @@ public class UsuarioController {
 	
 	@PostMapping
 	public Usuario addUsuario(@RequestBody Usuario usuario) {
-		return usuarioService.addUsuario(usuario);
+		return usuarioService.addUsuario(usuario, usuario.getRol());
 	}
 	
 	@PutMapping(path = "{userId}")

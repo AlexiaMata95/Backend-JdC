@@ -2,6 +2,8 @@ package org.generation.joyaDelCaribe.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,16 +27,20 @@ public class Usuario {
 	private String correo;
 	@Column(nullable=false)
 	private String contrasena;
+	@Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Rol rol; // Campo para el rol del usuario
 	
-	public Usuario(String nombre, String apellido, String telefono, String correo, String contrasena) {
+	public Usuario() {}
+
+	public Usuario(String nombre, String apellido, String telefono, String correo, String contrasena, Rol rol) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
 		this.correo = correo;
 		this.contrasena = contrasena;
+		this.rol = rol;
 	}
-	
-	public Usuario() {}
 
 	public Long getIdUser() {
 		return idUser;
@@ -80,9 +86,17 @@ public class Usuario {
 		this.contrasena = contrasena;
 	}
 
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [idUser=" + idUser + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono
-				+ ", correo=" + correo + ", contrasena=" + contrasena + "]";
+				+ ", correo=" + correo + ", contrasena=" + contrasena + ", rol=" + rol + "]";
 	}
 }

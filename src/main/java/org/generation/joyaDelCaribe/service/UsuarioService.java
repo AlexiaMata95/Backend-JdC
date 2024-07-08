@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.generation.joyaDelCaribe.model.ChangePassword;
+import org.generation.joyaDelCaribe.model.Rol;
 import org.generation.joyaDelCaribe.model.Usuario;
 import org.generation.joyaDelCaribe.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +41,14 @@ public class UsuarioService {
 		return tmpUser;
 	}
 
-	public Usuario addUsuario(Usuario usuario) {
+	public Usuario addUsuario(Usuario usuario, Rol rol) {
 		Optional<Usuario> tmpUser = usuarioRepository.findByCorreo(usuario.getCorreo());
 		if (tmpUser.isEmpty()) {
 			usuario.setContrasena(encoder.encode(usuario.getContrasena()));
+			usuario.setRol(rol);
 			return usuarioRepository.save(usuario);
 		}else {
-			System.out.println("El usuario con el nombre [] ya existe");
+			System.out.println("El usuario con el correo " + usuario.getCorreo() + " ya existe");
 			return null;
 		}
 	}
@@ -66,15 +68,23 @@ public class UsuarioService {
 		return tmpUser;
 	}
 	
-	public boolean validateUser(Usuario usuario) {
+	public boolean validateUser(Usuario usuario, Rol rol) {
 		Optional<Usuario> userByEmail = usuarioRepository.findByCorreo(usuario.getCorreo());
 		if(userByEmail.isPresent()) {
 			Usuario tmpUser = userByEmail.get();
-			if(encoder.matches(usuario.getContrasena(), tmpUser.getContrasena())) {
+			if(encoder.matches(usuario.getContrasena(), tmpUser.getContrasena()) && tmpUser.getRol().equals(rol)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public Rol getUserRole(Usuario usuario) {
+		Optional<Usuario> userByEmail = usuarioRepository.findByCorreo(usuario.getCorreo());
+        if(userByEmail.isPresent()) {
+            return userByEmail.get().getRol();
+        }
+        return null;
 	}
 
 }
