@@ -73,12 +73,12 @@ function validateForm(event) {
         document.getElementById('newUser').disabled = true;
         // Crear objeto usuario
         let newUser = {
-            name: formName.value.trim().replace(/\s+/g, ' '),
-            lastName: formLastName.value.trim().replace(/\s+/g, ' '),
-            phone: formPhone.value,
-            email: formEmail.value.trim().toLowerCase(),
-            password: formPassword.value,
-            passwordConfirm: formPasswordConfirm.value,
+            nombre: formName.value.trim().replace(/\s+/g, ' '),
+            apellido: formLastName.value.trim().replace(/\s+/g, ' '),
+            telefono: formPhone.value,
+            correo: formEmail.value.trim().toLowerCase(),
+            contrasena: formPassword.value,
+            rol: "CLIENTE"
         }
         addUser(newUser);
         
@@ -88,18 +88,41 @@ function validateForm(event) {
             text: "¡Bienvenido a Joya del Caribe!",
             showConfirmButton: false,
         });
-        setTimeout(() => {
-            window.location.href = "../iniciosesion.html";
-        }, 2000);
+//        setTimeout(() => {
+//            window.location.href = "../iniciosesion.html";
+//        }, 2000);
     }
 }
 
 function addUser(userObject) {
-    // Agregar usuario al array de usuarios
-    userArray.push(userObject);
-    // Mandar el array de datos al localStorage
-    //          .agregarCosa Nombre de Cosa, lo volvemos string porque asi se leen los datos en el lS           
-    localStorage.setItem('userArray', JSON.stringify(userArray));
+//    // Agregar usuario al array de usuarios
+//    userArray.push(userObject);
+//    // Mandar el array de datos al localStorage
+//    //          .agregarCosa Nombre de Cosa, lo volvemos string porque asi se leen los datos en el lS           
+//    localStorage.setItem('userArray', JSON.stringify(userArray));
+	URL = "/api/usuarios/"
+    const promise = fetch(URL, 
+    {
+        method : 'POST',
+        body: JSON.stringify(userObject),
+        headers : {
+            'Content-Type': 'application/json',
+          }
+    })
+
+    promise
+    .then((response) => {
+        response.json()
+            .then((json) => {
+                console.log( "Success: " + json);
+            })
+            .catch((error) => {
+                console.log('Hubo un problema con el JSON ' + error);
+            });
+    })
+    .catch((error) => {
+        console.log('Hubo un problema con la solicitud ' + error);
+    });
 }
 
 function validacion(regex, form, alert) {
