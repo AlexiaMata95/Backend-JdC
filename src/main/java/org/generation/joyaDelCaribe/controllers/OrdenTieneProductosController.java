@@ -8,6 +8,7 @@ import org.generation.joyaDelCaribe.model.OrdenTieneProductos;
 import org.generation.joyaDelCaribe.model.OrdenTieneProductosKey;
 import org.generation.joyaDelCaribe.service.OrdenTieneProductosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+@CrossOrigin(origins = {"http://127.0.0.1:5501/", "https://baomasu.github.io/JoyaDelCaribe/"})
 @RestController
 @RequestMapping("/api/orden-tiene-productos")
 public class OrdenTieneProductosController {
