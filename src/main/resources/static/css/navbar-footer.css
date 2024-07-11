@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* <-----------------------------Navbar-----------------------------> */
+.nav-item a {
+    color: #4b4b4b;
+    
+}
+
+.nav-item a:hover {
+    color: #880d40
+}
+
+/* <-----------------------------Footer-----------------------------> */
+.footer-section {
+    background-color: #A53860;
+    color: #F6F0E9;
+}
+
+.footer-section a {
+    text-decoration: none;
+    color: #F6F0E9;
+
+    transition: 0.3s;
+}
+
+.footer-section a:hover {
+    color: #450920;
+}
+
+.footerPago {
+    background-color: #F6F0E9;
+}

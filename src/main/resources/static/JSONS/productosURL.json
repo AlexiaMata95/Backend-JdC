@@ -1,0 +1,103 @@
+{
+    "productos": [
+        {
+          "id": 1,
+          "name": "Frescura Marina",
+          "product": "Limpiador Facial Suave",
+          "description": "Revitaliza tu piel con cada lavado gracias a nuestro limpiador 'Frescura Marina', que limpia profundamente mientras mantiene la hidratación natural de tu piel.",
+          "price": 499.00,
+          "category": "SkinCare",
+          "img": "https://res.cloudinary.com/dqfqn6tnq/image/upload/v1719904378/j0f5sutgb8ddysexsij4.webp",
+          "discount": 0
+        },
+        {
+          "id": 2,
+          "name": "Bruma de Cenote",
+          "product": "Tónico Facial con Ácido Hialurónico",
+          "description": "Refresca y prepara tu piel con la hidratación del ácido hialurónico inspirado en las aguas cristalinas de los cenotes del Caribe.",
+          "price": 559.00,
+          "category": "SkinCare",
+          "img": "https://res.cloudinary.com/dqfqn6tnq/image/upload/v1719904377/b09kmkuezbivul5wkxvb.webp",
+          "discount": 0
+        },
+        {
+          "id": 3,
+          "name": "Esencia Citrus",
+          "product": "Serum de Vitamina C",
+          "description": "Ilumina tu rostro con el poder antioxidante de la vitamina C, capturando la esencia de los cítricos caribeños en cada gota.",
+          "price": 199.00,
+          "category": "SkinCare",
+          "img": "https://res.cloudinary.com/dqfqn6tnq/image/upload/v1719904377/gsvxsbdj7kn6z29olizk.webp",
+          "discount": 20
+        },
+        {
+          "id": 4,
+          "name": "Sol Caribeño",
+          "product": "Crema Hidratante con SPF",
+          "description": "Protege y nutre tu piel bajo el sol tropical con nuestra crema hidratante que combina hidratación profunda y protección solar eficaz.",
+          "price": 329.00,
+          "category": "SkinCare",
+          "img": "https://res.cloudinary.com/dqfqn6tnq/image/upload/v1719904377/eelsedbvjrwa02wkmsdi.webp",
+          "discount": 0
+        },
+        {
+          "id": 5,
+          "name": "Arcilla de Tulum",
+          "product": "Mascarilla de Arcilla",
+          "description": "Purifica y renueva tu piel con la rica arcilla extraída de la profundidad de Tulum, perfecta para un tratamiento detoxificante.",
+          "price": 189.00,
+          "category": "SkinCare",
+          "img": "https://res.cloudinary.com/dqfqn6tnq/image/upload/v1719904377/oop1fwlbjxmkjsmv7j5q.webp",
+          "discount": 5
+        },
+        {
+          "id": 6,
+          "name": "Arena Coralina",
+          "product": "Exfoliante Facial",
+          "description": "Suaviza y renueva tu piel con granos de arena coralina, diseñados para exfoliar delicadamente y promover la regeneración cutánea.",
+          "price": 89.00,
+          "category": "Maquillaje",
+          "img": "https://res.cloudinary.com/dqfqn6tnq/image/upload/v1719904377/sxxy1abdv3uykumyerg1.webp",
+          "discount": 0
+        },
+        {
+          "id": 7,
+          "name": "Elixir Tropical",
+          "product": "Aceite Facial Nutritivo",
+          "description": "Rico en nutrientes y antioxidantes, este aceite facial envuelve tu piel en un velo de hidratación tropical intensiva.",
+          "price": 199.00,
+          "category": "Maquillaje",
+          "img": "https://res.cloudinary.com/dqfqn6tnq/image/upload/v1719904377/m2y7k2b1vanbrqwsqoma.webp",
+          "discount": 0
+        },
+        {
+          "id": 8,
+          "name": "Mirada de Sirena",
+          "product": "Contorno de Ojos",
+          "description": "Rejuvenece e ilumina el contorno de tus ojos con esta fórmula especial, diseñada para reducir visiblemente signos de cansancio y envejecimiento.",
+          "price": 119.00,
+          "category": "Maquillaje",
+          "img": "https://res.cloudinary.com/dqfqn6tnq/image/upload/v1719904377/hbhrtnojq2n83rrpw7cz.webp",
+          "discount": 10
+        },
+        {
+          "id": 9,
+          "name": "Velo de Playa",
+          "product": "Prebase de Maquillaje",
+          "description": "Prepara tu piel para un maquillaje impecable con nuestro primer 'Velo de Playa', que suaviza la piel y prolonga la duración de tu look.",
+          "price": 249.00,
+          "category": "Maquillaje",
+          "img": "https://res.cloudinary.com/dqfqn6tnq/image/upload/v1719904377/hue59y2tygjeaf8vy8g1.webp",
+          "discount": 0
+        },
+        {
+          "id": 10,
+          "name": "Tonos del Caribe",
+          "product": "Base de Maquillaje Líquida",
+          "description": "Consigue un acabado perfecto y natural con nuestra base de maquillaje, disponible en varias tonalidades para coincidir con el verdadero tono de tu piel.",
+          "price": 299.00,
+          "category": "Maquillaje",
+          "img": "https://res.cloudinary.com/dqfqn6tnq/image/upload/v1719904377/siccixzgjcsfs9cklkfg.webp",
+          "discount": 0
+        }]
+}

@@ -1,0 +1,57 @@
+.titulo {
+    height: 25rem;
+    background-image: url(../src/assets/productosDesk/productImages/h2-rev-img-01.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+#followUs{
+    background-color: #F4EDEA;
+}
+
+.titutloSeccion{
+    font-size: 2rem;
+    color: #000;
+    margin-bottom: 2rem;
+}
+
+.titulo p{
+    color: white;
+    font-size: 3.4rem;
+}
+
+.categoria-btn{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    font-weight: 400;
+    transition: 0.3s ease all;
+}
+
+.categoria-btn:hover{
+    color: chocolate;
+    transition: 0.3s ease all;
+}
+
+.categoria-btn:hover .icono{
+    display: inline !important;
+}
+
+#mostrar-todo{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    font-weight: 400;
+    transition: 0.3s ease all;
+}
+
+#mostrar-todo:hover{
+    color: chocolate;
+    transition: 0.3s ease all;
+}
+
+#mostrar-todo:hover .icono{
+    display: inline !important;
+}
+/* el margin es para los container de adentro a afuera*/
+/* paddin funciona con el contenido del contenedor*/
