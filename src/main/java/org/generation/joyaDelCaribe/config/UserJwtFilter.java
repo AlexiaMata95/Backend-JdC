@@ -48,9 +48,7 @@ public class UserJwtFilter extends GenericFilterBean {
 							|| "DELETE".equals(httpServletRequest.getMethod()))) {
 						throw new ServletException("3. Acceso denegado para el rol CLIENTE en la API de productos.");
 					}
-					if (isUserAPI && ("GET".equals(httpServletRequest.getMethod())
-							|| "POST".equals(httpServletRequest.getMethod())
-							|| "DELETE".equals(httpServletRequest.getMethod()))) {
+					if (isUserAPI && "DELETE".equals(httpServletRequest.getMethod())) {
 						throw new ServletException("3. Acceso denegado para el rol CLIENTE en la API de usuarios.");
 					}
 				}
