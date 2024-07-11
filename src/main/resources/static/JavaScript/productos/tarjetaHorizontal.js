@@ -35,7 +35,6 @@ function getData(carouselConfig) { // Obtener datos del JSON
             return response.json();
         })
         .then(productList => {
-            console.log('Response JSON:', productList); // Utiliza console.log para ver la respuesta completa
             if (!Array.isArray(productList)) {
                 throw new Error('Expected an array but got ' + typeof productList);
             }
@@ -52,7 +51,6 @@ function renderAllCarousels() {
 }
 
 function renderCarouselItems(carouselId, productList, condition, title) {
-    console.log('Renderizando carrusel:', carouselId, productList, condition, title); // Depuración
     const carouselContainer = document.getElementById(carouselId);
     if (!document.getElementById(`${carouselId}-title`)) {
         carouselContainer.insertAdjacentHTML('beforebegin', `
@@ -83,10 +81,8 @@ function renderCarouselItems(carouselId, productList, condition, title) {
     }
 
     productList.filter(product => {
-        console.log('Condición de filtro:', condition(product), product); // Depuración
         return condition(product);
     }).forEach((product, i) => {
-        console.log('Producto después del filtro:', product); // Depuración
         const itemsPerSlide = isMobile ? 1 : isTablet ? 2 : 3;
         if (!carouselItem || (indexCounter % itemsPerSlide === 0 && i !== 0)) {
             createNewCarouselItem();
