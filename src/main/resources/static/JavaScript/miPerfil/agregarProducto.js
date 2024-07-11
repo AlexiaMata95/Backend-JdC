@@ -88,31 +88,25 @@ function validateForm(event) {
     }
 
     if (isValid) {
-        let productos = JSON.parse(localStorage.getItem('productos'));
-        console.log(productos);
+        // let productos = JSON.parse(localStorage.getItem('productos'));
+        // console.log(productos);
         // sendData(); //push a arreglo de json
         let objetoProducto = {
-            "id": productos.length + 1,
-            "name": formName.value.trim().replace(/\s+/g, ' '),
-            "product": formType.value.trim().replace(/\s+/g, ' '),
-            "description": formDescription.value.trim().replace(/\s+/g, ' '),
-            "price": parseFloat(formPrice.value).toFixed(2),
-            "category": formCategory.value.trim().replace(/\s+/g, ' '),
-            "img": urlImg,
-            "discount": parseInt(formDiscount.value)
+            "nombre": formName.value.trim().replace(/\s+/g, ' '),
+            "producto": formType.value.trim().replace(/\s+/g, ' '),
+            "precio": parseFloat(formPrice.value).toFixed(2),
+            "imagen": urlImg,
+            "categoria": formCategory.value.trim().replace(/\s+/g, ' '),
+            "descripcion": formDescription.value.trim().replace(/\s+/g, ' '),
+            "descuento": parseInt(formDiscount.value) / 100
         }
-        // agregar objetoProducto a productos
-        productos.push(objetoProducto);
-        localStorage.setItem('productos', JSON.stringify(productos));
 
+        let token = localStorage.getItem('token');
+        sendData(objetoProducto, token);
+        // imprimir token de localStorage
+        
 
-        Swal.fire({
-            icon: "success",
-            title: "¡Envío exitoso!",
-            text: "¡Producto agregado con exito!",
-            showConfirmButton: false,
-            timer: 2000
-        });
+        
 
         // Limpiar formulario
         formName.value = "";
@@ -131,35 +125,84 @@ function validateForm(event) {
         formType.classList.remove("is-valid");
         formDescription.classList.remove("is-valid");
     }
-    
+
 }
-function sendData() {
-    const promise = fetch('../../JSONS/productos.json', { method: 'GET' });
-    promise
-        .then((response) => {
-            response.json()
-                .then((productObj) => {
-                    productObj.productos.push(
-                        {
-                            "id": productObj.productos.length + 1,
-                            "name": formName.value,
-                            "product": formType.value,
-                            "description": formDescription.value,
-                            "price": formPrice.value,
-                            "category": formCategory.value,
-                            "img": urlImg,
-                            "discount": formDiscount.value
-                        }
-                    );
-                    console.log(productObj.productos[productObj.productos.length - 1]);
-                })
-                .catch((error) => {
-                    console.log('Hubo un problema con el JSON ' + error);
+function sendData(objetoProducto, token) {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", token);
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify(objetoProducto);
+
+    const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+    };
+
+    fetch("/api/productos/", requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+            // si es nulo el result, es porque no se pudo agregar el producto
+            if (!result) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Producto duplicado",
+                    text: "El producto que intentas agregar ya existe en el inventario.",
+                    showConfirmButton: true,
+                    confirmButtonText: "Entendido",
+                    timer: 3000,
+                    timerProgressBar: true,
+                    customClass: {
+                        popup: 'popup-class',
+                        title: 'title-class',
+                        confirmButton: 'confirm-button-class'
+                    }
                 });
+                
+            } else{
+                // obtener token de localStorage
+                let token = localStorage.getItem('token');
+
+                if (token) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "¡Envío exitoso!",
+                        text: "¡El producto se ha agregado con éxito!",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar",
+                        timer: 3000,
+                        timerProgressBar: true,
+                        customClass: {
+                            popup: 'success-popup-class',
+                            title: 'success-title-class',
+                            confirmButton: 'success-confirm-button-class'
+                        }
+                    });
+                } else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "¡Error!",
+                        text: "¡Incia sesión como Administrador!",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar",
+                        timer: 3000,
+                        timerProgressBar: true,
+                        customClass: {
+                            popup: 'popup-class',
+                            title: 'title-class',
+                            confirmButton: 'confirm-button-class'
+                        }
+                    });
+                }
+
+
+                
+                
+            }
         })
-        .catch((error) => {
-            console.log('Hubo un problema con la solicitud ' + error);
-        });
+        .catch((error) => console.error(error));
 }
 
 function validacion(regex, form, alert) {
@@ -174,30 +217,3 @@ function validacion(regex, form, alert) {
         return true;
     }
 }
-
-// fetch de productos, si no existe en localStorage
-function getData() {
-    const promise = fetch('../JSONS/productosURL.json', { method: 'GET' });
-    promise
-        .then((response) => {
-            response.json()
-                .then((productObj) => {
-                    // pasar productObj al localStorage
-                    localStorage.setItem('productos', JSON.stringify(productObj.productos));
-                    productosLocal = JSON.parse(localStorage.getItem('productos'));
-                    listarProductos(productosLocal);
-                })
-                .catch((error) => {
-                    console.log('Hubo un problema con el JSON ' + error);
-                });
-        })
-        .catch((error) => {
-            console.log('Hubo un problema con la solicitud ' + error);
-        });
-}
-
-// verificar si existe productos en el localStorage
-if (!localStorage.getItem('productos')) {
-    getData();
-}
-

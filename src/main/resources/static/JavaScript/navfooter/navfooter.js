@@ -1,15 +1,66 @@
 let main = document.getElementsByTagName('main')[0];
 
-// Cargar los datos de usuarios desde localStorage
-const user = JSON.parse(localStorage.getItem('userArray')) || [];
-const login = JSON.parse(localStorage.getItem('userLogin')) || [];
+// obtener token de localStorage
+let token = localStorage.getItem('token');
+// obtener email de localStorage
+let email = localStorage.getItem('email');
 
-// Usar operador ternario para simplificar la asignación de valores
-const nombreUser = user.length > 0 ? user[0].email : "";
-const nombreLogin = login.length > 0 ? login[0].email : "";
+function buscarUsuario(token) {
+    return new Promise((resolve, reject) => {
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", token);
 
-// Asignar nombre basado en la comparación de correos, con operador ternario
-const nombreCuenta = nombreUser === nombreLogin && user.length > 0 ? user[0].name : "Cuenta";
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+        };
+
+        fetch("/api/usuarios/", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                
+                if (token && email) {
+                    let encontrado = false; // Indicador si se encontró el usuario
+                    result.forEach(usuario => {
+                        if(usuario.correo == email){
+                            nombreCuenta = usuario.nombre;
+                            console.log("Nombre de la cuenta: "+usuario.nombre);
+                            console.log("Correo de la cuenta: "+usuario.correo);
+                            encontrado = true;
+                        }
+                    });
+                    if (!encontrado) {
+                        nombreCuenta = "Iniciar Sesión";
+                    }
+                    resolve(nombreCuenta); // Resuelve la promesa con el valor de nombreCuenta
+                } else {
+                    reject("Token o email no proporcionado");
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                reject(error); // Rechaza la promesa si hay un error
+            });
+    });
+}
+
+async function iniciar() {
+    try {
+        const nombre = await buscarUsuario(token); // Espera a que buscarUsuario se complete
+        // Actualiza el DOM directamente aquí
+        document.querySelector('#nombreCuenta').textContent = nombre;
+    } catch (error) {
+        console.error("Error al buscar usuario:", error);
+    }
+}
+
+// Llama a iniciar en el momento adecuado, por ejemplo, después de cargar el DOM
+if(token && email){
+    document.addEventListener('DOMContentLoaded', iniciar);
+}
+
+
 
     main.insertAdjacentHTML('beforebegin', `
         <div class="border-bottom py-2 bg-light">
@@ -48,14 +99,14 @@ const nombreCuenta = nombreUser === nombreLogin && user.length > 0 ? user[0].nam
                     <li class="nav-item">
                         <a class="nav-link mx-2 text-uppercase" href="../../nosotros.html">Nosotros</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="agregarProducto">
                         <a class="nav-link mx-2 text-uppercase" href="../../miPerfil.html">Agregar Producto</a>
                     </li>
                 </ul>
                     <ul class="navbar-nav ms-auto">
                         <div class="dropdown mb-3">
                             <a class="btn btn-secondary dropdown-toggle mx-2 text-uppercase" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-check-fill"></i> ${nombreCuenta}
+                                <i class="bi bi-person-check-fill"></i> <span id="nombreCuenta">Cuenta</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../../iniciosesion.html">Iniciar Sesión</a></li>
@@ -183,11 +234,8 @@ function initializeFooterButton() {
 initializeFooterButton();
 
 function cerrarSesion() {
-    let sesion = JSON.parse(localStorage.getItem('userLogin'));
-    if (sesion == null) {
-        sesion = "";
-    } else {
-        localStorage.removeItem('userLogin');
-
-    }
+// borrar email de localStorage
+localStorage.removeItem('email');
+localStorage.removeItem('token');
 }
+
